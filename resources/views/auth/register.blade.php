@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout3')
 
 @section('title', 'Sign Up for an Account')
 

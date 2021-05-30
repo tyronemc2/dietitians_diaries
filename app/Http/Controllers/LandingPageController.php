@@ -16,6 +16,6 @@ class LandingPageController extends Controller
     {
         $products = Product::where('featured', true)->take(8)->inRandomOrder()->get();
 
-        return view('landing-page')->with('products', $products);
+        return view('landing-page2')->with('products', $products);
     }
 }

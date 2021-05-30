@@ -1014,7 +1014,7 @@ footer {
 }
 
 .products-section {
-  display: grid;
+//  display: grid;
   grid-template-columns: 1fr 3fr;
   margin: 80px auto 80px;
 }
@@ -1039,7 +1039,7 @@ footer {
 }
 
 .product-section {
-  display: grid;
+//  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 120px;
   padding: 100px 0 120px;
@@ -1109,7 +1109,7 @@ footer {
 }
 
 .cart-section {
-  display: grid;
+//  display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 30px;
   margin: 60px auto;

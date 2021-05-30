@@ -37,11 +37,11 @@ class CheckoutController extends Controller
             'privateKey' => config('services.braintree.privateKey')
         ]);
 
-        try {
-            $paypalToken = $gateway->ClientToken()->generate();
-        } catch (\Exception $e) {
+    //    try {
+    //        $paypalToken = $gateway->ClientToken()->generate();
+    //    } catch (\Exception $e) {
             $paypalToken = null;
-        }
+    //    }
 
         return view('checkout')->with([
             'paypalToken' => $paypalToken,
@@ -71,6 +71,7 @@ class CheckoutController extends Controller
         })->values()->toJson();
 
         try {
+            /*
             $charge = Stripe::charges()->create([
                 'amount' => getNumbers()->get('newTotal') / 100,
                 'currency' => 'CAD',
@@ -83,6 +84,8 @@ class CheckoutController extends Controller
                     'discount' => collect(session()->get('coupon'))->toJson(),
                 ],
             ]);
+             * 
+             */
 
             $order = $this->addToOrdersTables($request, null);
             Mail::send(new OrderPlaced($order));

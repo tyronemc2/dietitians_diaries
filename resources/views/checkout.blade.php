@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout3')
 
 @section('title', 'Checkout')
 
@@ -9,7 +9,7 @@
         }
     </style>
 
-    <script src="https://js.stripe.com/v3/"></script>
+ <!--   <script src="https://js.stripe.com/v3/"></script>-->
 
 @endsection
 
@@ -187,7 +187,8 @@
 @endsection
 
 @section('extra-js')
-    <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
+<?php
+/*    <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
 
     <script>
         (function(){
@@ -317,4 +318,7 @@
 
         })();
     </script>
+ * 
+ */
+?>
 @endsection
