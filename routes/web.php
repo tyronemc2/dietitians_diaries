@@ -46,3 +46,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-orders', 'OrdersController@index')->name('orders.index');
     Route::get('/my-orders/{order}', 'OrdersController@show')->name('orders.show');
 });
+// Catch all page controller (place at the very bottom)
+Route::get('/page/{slug}', [
+	'uses' => 'PagesController@getPage'
+])->where('slug', '([A-Za-z0-9\-\/]+)');
+// Catch all page controller (place at the very bottom)
+Route::get('/post/{slug}', [
+	'uses' => 'PostsController@getPost'
+])->where('slug', '([A-Za-z0-9\-\/]+)');
+
