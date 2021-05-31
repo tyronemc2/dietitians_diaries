@@ -15,7 +15,7 @@ Thank you for your order.
 
 @foreach ($order->products as $product)
 Name: {{ $product->name }} <br>
-Price: ${{ round($product->price / 100, 2)}} <br>
+Price: R{{ round($product->price / 100, 2)}} <br>
 Quantity: {{ $product->pivot->quantity }} <br>
 @endforeach
 
