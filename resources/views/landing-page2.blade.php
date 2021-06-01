@@ -522,6 +522,8 @@
                     <div class="pricing-tables pad-top-55">
                         <?php
                         foreach($products as $product){ ?>
+                        <a href="{{ route('shop.show', $product->slug) }}">
+                        
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding pricebox">
                             
                             <div class="element">
@@ -547,6 +549,7 @@
                                 </div>-->
                             </div>
                         </div>
+                            </a>
                         <?php } ?>
                     </div>
                 </div>
