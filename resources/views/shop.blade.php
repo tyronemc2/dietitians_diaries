@@ -42,6 +42,28 @@
             </ul>
         </div> <!-- end sidebar -->
         <div>
+            @if ((count($featured_products) > 0))
+            <div class="products-header">
+                <h1 class="stylish-heading">{{ $featured_categoryName }}</h1>
+                <div>
+                    <strong>Price: </strong>
+                    <a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'low_high']) }}">Low to High</a> |
+                    <a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'high_low']) }}">High to Low</a>
+
+                </div>
+            </div>
+
+            <div class="products text-center">
+                @forelse ($featured_products as $featured_product)
+                    <div class="product">
+                        <a href="{{ route('shop.show', $featured_product->slug) }}"><img src="{{ productImage($featured_product->image) }}" alt="product"></a>
+                        <a href="{{ route('shop.show', $featured_product->slug) }}"><div class="product-name">{{ $featured_product->name }}</div></a>
+                        <div class="product-price">{{ $featured_product->presentPrice() }}</div>
+                    </div>
+                @empty
+                @endforelse
+            </div>
+            @endif
             <div class="products-header">
                 <h1 class="stylish-heading">{{ $categoryName }}</h1>
                 <div>
@@ -51,7 +73,6 @@
 
                 </div>
             </div>
-
             <div class="products text-center">
                 @forelse ($products as $product)
                     <div class="product">
@@ -62,7 +83,7 @@
                 @empty
                     <div style="text-align: left">No items found</div>
                 @endforelse
-            </div> <!-- end products -->
+            </div><!-- end products -->
 
             <div class="spacer"></div>
             {{ $products->appends(request()->input())->links() }}

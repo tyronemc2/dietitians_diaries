@@ -24,22 +24,27 @@ class ShopController extends Controller
             });
             $categoryName = optional($categories->where('slug', request()->category)->first())->name;
         } else {
-            $products = Product::where('featured', true);
-            $categoryName = 'Featured';
+            $featured_products = Product::with('categories')->where('featured', 1);
+            $featured_categoryName = 'Featured';
+            $products = Product::with('categories');
+            $categoryName = 'All';
         }
-
+//print_r($featured_products);
         if (request()->sort == 'low_high') {
             $products = $products->orderBy('price')->paginate($pagination);
         } elseif (request()->sort == 'high_low') {
             $products = $products->orderBy('price', 'desc')->paginate($pagination);
         } else {
             $products = $products->paginate($pagination);
+            $featured_products = $featured_products->paginate($pagination);
         }
 
         return view('shop')->with([
             'products' => $products,
             'categories' => $categories,
             'categoryName' => $categoryName,
+            'featured_products' => $featured_products,
+            'featured_categoryName' => $featured_categoryName,
         ]);
     }
 
