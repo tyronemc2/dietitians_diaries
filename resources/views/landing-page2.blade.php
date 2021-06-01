@@ -520,150 +520,34 @@
                 </div>
                 <div class="row">
                     <div class="pricing-tables pad-top-55">
+                        <?php
+                        foreach($products as $product){ ?>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding pricebox">
+                            
                             <div class="element">
                                 <div class="plan-top">
                                     <!--<div class="skewpink"></div>-->
-                                    <h5> Female Weight loss </h5>
+                                    <h5> {{ $product->name }} </h5>
                                 </div>
-                                <!--<div class="plan-side">
+                                <div class="product-section-image">
+                                    <img src="{{ productImage($product->image) }}" alt="product" style="margin-top: 60px;" class="active" id="currentImage">
+                                </div>
+                                <div class="plan-side">
                                     <div class="skewback">
-                                        <h2> $25<sub>/mo.</sub></h2>
-                                        <h6> With Jon Deo </h6>
+                                        <h2> {{ $product->presentPrice() }} </h2>
+                                        
                                     </div>
-                                </div> -->
-                                <div class="midIcon"><i class="flaticon-waist fIcons"></i></div>
+                                </div> 
                                 
-                                <ul class="plan-list">
-                                    <li> 8 Week meal plan </li>
-                                    <li> Full shopping list </li>
-                                    <li> Recipes </li>
-                                    <li> Weekly workout plan </li>
-                                </ul>
-                                <!--<button type="button" class="fill-btn">explore more</button>-->
+                                <!--<button type="button" class="fill-btn">explore more</button>
                                 <div class="buy-buttons">
                                     <button type="button" class="fill-btn">Buy Now</button>
                                     <button type="button" class="fill-btn circled"><i class="fa fa-heart" aria-hidden="true"></i></button>
                                     <button type="button" class="fill-btn circled"><i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding pricebox">
-                            <div class="element">
-                                <div class="plan-top">
-                                    <!--<div class="skewpink"></div>-->
-                                    <h5> Male Weight loss </h5>
-                                </div>
-                                <!--<div class="plan-side">
-                                    <div class="skewback">
-                                        <h2> $25<sub>/mo.</sub></h2>
-                                        <h6> With Jon Deo </h6>
-                                    </div>
-                                </div> -->
-                                <div class="midIcon"><i class="flaticon-scales fIcons"></i></div>
-                                
-                                <ul class="plan-list">
-                                    <li> 8 Week meal plan </li>
-                                    <li> Full shopping list </li>
-                                    <li> Recipes </li>
-                                    <li> Weekly workout plan </li>
-                                    <li></li>
-                                </ul>
-                                <button type="button" class="fill-btn">explore more</button>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding pricebox">
-                            <div class="element">
-                                <div class="plan-top">
-                                    <!--<div class="skewpink"></div>-->
-                                    <h5> Female muscle building </h5>
-                                </div>
-                                <!--<div class="plan-side">
-                                    <div class="skewback">
-                                        <h2> $25<sub>/mo.</sub></h2>
-                                        <h6> With Jon Deo </h6>
-                                    </div>
-                                </div> -->
-                                <div class="midIcon"><i class="flaticon-dumbbell-2 fIcons"></i></div>
-                                
-                                <ul class="plan-list">
-                                    <li> 8 Week meal plan </li>
-                                    <li> Full shopping list </li>
-                                    <li> Recipes </li>
-                                    <li> Weekly workout plan </li>
-                                </ul>
-                                <!--<button type="button" class="fill-btn">explore more</button>-->
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding pricebox">
-                            <div class="element">
-                                <div class="plan-top">
-                                    <!--<div class="skewpink"></div>-->
-                                    <h5> Male muscle building </h5>
-                                </div>
-                                <!--<div class="plan-side">
-                                    <div class="skewback">
-                                        <h2> $25<sub>/mo.</sub></h2>
-                                        <h6> With Jon Deo </h6>
-                                    </div>
-                                </div> -->
-                                <div class="midIcon"><i class="flaticon-brawn fIcons"></i></div>
-                                
-                                <ul class="plan-list">
-                                    <li> 8 Week meal plan </li>
-                                    <li> Full shopping list </li>
-                                    <li> Recipes </li>
-                                    <li> Weekly workout plan </li>
-                                </ul>
-                                <!--<button type="button" class="fill-btn">explore more</button>-->
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding pricebox">
-                            <div class="element">
-                                <div class="plan-top">
-                                    <!--<div class="skewpink"></div>-->
-                                    <h5> Female healthy gut </h5>
-                                </div>
-                                <!--<div class="plan-side">
-                                    <div class="skewback">
-                                        <h2> $25<sub>/mo.</sub></h2>
-                                        <h6> With Jon Deo </h6>
-                                    </div>
-                                </div> -->
-                                <div class="midIcon"><i class="flaticon-fresh-juice fIcons"></i></div>
-                                
-                                <ul class="plan-list">
-                                    <li> 8 Week meal plan </li>
-                                    <li> Full shopping list </li>
-                                    <li> Recipes </li>
-                                    <li> Weekly workout plan </li>
-                                </ul>
-                                <!--<button type="button" class="fill-btn">explore more</button>-->
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 no-padding pricebox">
-                            <div class="element">
-                                <div class="plan-top">
-                                    <!--<div class="skewpink"></div>-->
-                                    <h5> Male healthy gut </h5>
-                                </div>
-                                <!--<div class="plan-side">
-                                    <div class="skewback">
-                                        <h2> $25<sub>/mo.</sub></h2>
-                                        <h6> With Jon Deo </h6>
-                                    </div>
-                                </div> -->
-                                <div class="midIcon"><i class="flaticon-no-fast-food fIcons"></i></div>
-                                
-                                <ul class="plan-list">
-                                    <li> 8 Week meal plan </li>
-                                    <li> Full shopping list </li>
-                                    <li> Recipes </li>
-                                    <li> Weekly workout plan </li>
-                                </ul>
-                                <!--<button type="button" class="fill-btn">explore more</button>-->
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
