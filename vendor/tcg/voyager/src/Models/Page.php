@@ -33,6 +33,10 @@ class Page extends Model
         if (!$this->author_id && Auth::user()) {
             $this->author_id = Auth::user()->getKey();
         }
+        //
+        if (!$this->status){
+            $this->status = self::STATUS_ACTIVE;
+        }
 
         parent::save();
     }
