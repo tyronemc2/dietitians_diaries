@@ -125,7 +125,7 @@
         <!-- Feature Section Ends -->
 
         <!-- Class Section Begins -->
-        <section id="class" class="class pad-top-115 pad-bottom-115">
+        <section id="services" class="class pad-top-115 pad-bottom-115">
             <div class="container pr">
                 <div class="secHead wow fadeInLeft animated" data-wow-delay="0.5s">
                     <div class="skewpink"></div>
