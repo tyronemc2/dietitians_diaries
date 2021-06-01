@@ -62,24 +62,28 @@
         <!-- Box Section Ends -->
 
         <!-- About Section Begins -->
+        <?php
+        foreach($pages as $page){
+        if($page->slug == 'welcome'){ ?>
         <section id="about" class="about pad-top-110 pad-bottom-120">
             <div class="container-fluid no-padding">
                 <div class="row no-margin">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 wow animated fadeInLeft" data-wow-delay="0.5s">
-                        <figure><img src="{{ asset('public/img/images/tape_2000.jpg')}}" alt="image" /></figure>
+                        <figure><img src="{{ productImage($page->image) }}" alt="image" /></figure>
                     </div>
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 pull-right wow animated fadeInRight" data-wow-delay="0.5s">
-                                <h6 class="titleTop"> WELCOME TO Dietitians Diaries </h6>
-                                <h2 class="sectionTitle">More about <span>Jessica Caldeira</span></h2>
-                                <p>Hi, I’m Jessica, a registered dietitian working in private practice as well as online. I am very passionate about helping people achieve their goals which is why I entered the field of nutrition.  I have a holistic view on wellness and believe that good health is achieved through our mental, physical and social state, which is why it is so important not to just change what we eat, but to also change the way we think about food. These principles are what my nutrition foundation is built on, as I aim to assist people in meeting the health and body goals they have always aimed for, in a way that is easy, sustainable and enjoyable as well.</p>
+                                <h6 class="titleTop"> {{ $page->title }} </h6>
+                                <h2 class="sectionTitle">{{ $page->excerpt }}</h2>
+                                <p>{{ $page->body }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <?php } } ?>
         <!-- About Section Ends -->
 
         <!-- Feature Section Begins 
