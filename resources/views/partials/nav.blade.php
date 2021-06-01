@@ -32,7 +32,7 @@
                                             <span class="icon-bar"></span>
                                         </button>
                                         <div class="logo">
-                                            <a class="navbar-brand" href="index.html"><img src="{{ asset('public/img/images/logo2.png')}}" alt="logo" /></a>
+                                            <a class="navbar-brand" href="{{ ENV('APP_URL') }}"><img src="{{ asset('public/img/images/logo2.png')}}" alt="logo" /></a>
                                         </div>
                                     </div>
 
