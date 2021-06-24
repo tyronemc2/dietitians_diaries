@@ -33,7 +33,7 @@ class CheckoutController extends Controller
         try {
             //
             //
-            $order = $this->addToOrdersTables($request, null);
+            $order = $this->addToOrdersTables();
             //
             //encryption key set in the Merchant Access Portal
             $encryptionKey = ENV('PAYGATE_ENCRYPTION'); //'secret';
@@ -189,7 +189,7 @@ class CheckoutController extends Controller
         }
     }
 
-    protected function addToOrdersTables($request, $error)
+    protected function addToOrdersTables()
     {
         // Insert into orders table
         $order = Order::create([
@@ -200,7 +200,6 @@ class CheckoutController extends Controller
             'billing_subtotal' => getNumbers()->get('newSubtotal'),
             'billing_tax' => getNumbers()->get('newTax')/100,
             'billing_total' => getNumbers()->get('newTotal')/100,
-            'error' => $error,
         ]);
 
         // Insert into order_product table
