@@ -29,33 +29,7 @@ class CheckoutController extends Controller
         if (auth()->user() && request()->is('guestCheckout')) {
             return redirect()->route('checkout.index');
         }
-
-        return view('checkout')->with([
-            'discount' => getNumbers()->get('discount'),
-            'newSubtotal' => getNumbers()->get('newSubtotal'),
-            'newTax' => getNumbers()->get('newTax'),
-            'newTotal' => getNumbers()->get('newTotal'),
-        ]);
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(CheckoutRequest $request)
-    {
-        // Check race condition when there are less items available to purchase
-        if ($this->productsAreNoLongerAvailable()) {
-            return back()->withErrors('Sorry! One of the items in your cart is no longer avialble.');
-        }
-
-        $contents = Cart::content()->map(function ($item) {
-            return $item->model->slug.', '.$item->qty;
-        })->values()->toJson();
-
+        //
         try {
             //
             //
@@ -66,10 +40,12 @@ class CheckoutController extends Controller
 
             //$DateTime = new DateTime();
 
+            $total = getNumbers()->get('newTotal');
+            
             $data = array(
                 'PAYGATE_ID'        => ENV('PAYGATE_ID'), //10011072130,
                 'REFERENCE'         => 'dd_'.$order->id,
-                'AMOUNT'            => getNumbers()->get('newTotal') / 100,
+                'AMOUNT'            => $total,
                 'CURRENCY'          => 'ZAR',
                 'RETURN_URL'        => ENV('PAYGATE_RETURN_URL'),
                 'TRANSACTION_DATE'  => date('Y-m-d H:i:s'),
@@ -102,10 +78,7 @@ class CheckoutController extends Controller
 
             //execute post
             $result = curl_exec($ch);
-echo "<pre>";
-print_r($result);
-echo "</pre>";
-exit();
+
             //close connection
             curl_close($ch);
             //
@@ -115,18 +88,63 @@ exit();
                 $the_order->save();
                 return back()->withErrors('Error! Something went wrong with the payment');
             }
-            if($result->REFERENCE != $the_order->id){
+            if($result->REFERENCE != 'dd_'.$the_order->id){
                 $the_order->error = 'ORDER_ID Invalid';
                 $the_order->save();
                 return back()->withErrors('Error! Something went wrong with the payment');
             }
-            if($result->CHECKSUM != $the_order->checksum){
-                $the_order->error = 'CHECKSUM Invalid';
-                $the_order->save();
-                return back()->withErrors('Error! Something went wrong with the payment');
-            }
+            
             $the_order->pay_request_id = $result->PAY_REQUEST_ID;
             $the_order->save();
+            //
+            $paydata = array(
+                'PAYGATE_ID'        => ENV('PAYGATE_ID'), //10011072130,
+                'PAY_REQUEST_ID'    => $result->PAY_REQUEST_ID,
+                'REFERENCE'         => 'dd_'.$the_order->id
+            );
+
+            $checksum = md5(implode('', $paydata) . $encryptionKey);
+
+            $paydata['CHECKSUM'] = $checksum;
+            
+            } catch (CardErrorException $e) {
+                $this->addToOrdersTables($request, $e->getMessage());
+                return back()->withErrors('Error! ' . $e->getMessage());
+            }
+            
+        return view('checkout')->with([
+            'PAY_REQUEST_ID' => $result->PAY_REQUEST_ID,
+            'CHECKSUM' => $checksum,
+            'discount' => getNumbers()->get('discount'),
+            'newSubtotal' => getNumbers()->get('newSubtotal'),
+            'newTax' => getNumbers()->get('newTax'),
+            'newTotal' => getNumbers()->get('newTotal'),
+        ]);
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CheckoutRequest $request)
+    {
+        // Check race condition when there are less items available to purchase
+        if ($this->productsAreNoLongerAvailable()) {
+            return back()->withErrors('Sorry! One of the items in your cart is no longer avialble.');
+        }
+
+        $contents = Cart::content()->map(function ($item) {
+            return $item->model->slug.', '.$item->qty;
+        })->values()->toJson();
+
+        try {
+            //
+            //
+            $order = $this->addOrder($request, null);
+            //
             //
             $this->decreaseQuantities();
 
@@ -137,7 +155,7 @@ exit();
         
 
             } catch (CardErrorException $e) {
-                $this->addToOrdersTables($request, $e->getMessage());
+                $this->addOrder($request, $e->getMessage());
                 return back()->withErrors('Error! ' . $e->getMessage());
             }
     }
@@ -176,13 +194,6 @@ exit();
         // Insert into orders table
         $order = Order::create([
             'user_id' => auth()->user() ? auth()->user()->id : null,
-            'billing_email' => $request->email,
-            'billing_name' => $request->name,
-            'billing_address' => $request->address,
-            'billing_city' => $request->city,
-            'billing_province' => $request->province,
-            'billing_postalcode' => $request->postalcode,
-            'billing_phone' => $request->phone,
             'payment_gateway' => 'paygate',
             'billing_discount' => getNumbers()->get('discount'),
             'billing_discount_code' => getNumbers()->get('code'),
@@ -200,6 +211,21 @@ exit();
                 'quantity' => $item->qty,
             ]);
         }
+
+        return $order;
+    }
+    protected function addOrder($request, $order_id)
+    {
+        // Insert into orders table
+        $order = Order::find($order->id);
+            $order->billing_email = $request->email;
+            $order->billing_name = $request->name;
+            $order->billing_address = $request->address;
+            $order->billing_city = $request->city;
+            $order->billing_province = $request->province;
+            $order->billing_postalcode = $request->postalcode;
+            $order->billing_phone = $request->phone;
+            $order->save();
 
         return $order;
     }
