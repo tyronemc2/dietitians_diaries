@@ -107,17 +107,17 @@ class CheckoutController extends Controller
             curl_close($ch);
             //
             //
-            if($request->PAYGATE_ID != ENV('PAYGATE_ID')){
+            if($result->PAYGATE_ID != ENV('PAYGATE_ID')){
                 $the_order->error = 'PAYGATE_ID Invalid';
                 $the_order->save();
                 return back()->withErrors('Error! Something went wrong with the payment');
             }
-            if($request->REFERENCE != $the_order->id){
+            if($result->REFERENCE != $the_order->id){
                 $the_order->error = 'ORDER_ID Invalid';
                 $the_order->save();
                 return back()->withErrors('Error! Something went wrong with the payment');
             }
-            if($request->CHECKSUM != $the_order->checksum){
+            if($result->CHECKSUM != $the_order->checksum){
                 $the_order->error = 'CHECKSUM Invalid';
                 $the_order->save();
                 return back()->withErrors('Error! Something went wrong with the payment');
@@ -184,8 +184,8 @@ class CheckoutController extends Controller
             'billing_discount' => getNumbers()->get('discount'),
             'billing_discount_code' => getNumbers()->get('code'),
             'billing_subtotal' => getNumbers()->get('newSubtotal'),
-            'billing_tax' => getNumbers()->get('newTax'),
-            'billing_total' => getNumbers()->get('newTotal'),
+            'billing_tax' => getNumbers()->get('newTax')/100,
+            'billing_total' => getNumbers()->get('newTotal')/100,
             'error' => $error,
         ]);
 
