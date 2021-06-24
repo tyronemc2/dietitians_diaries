@@ -59,7 +59,7 @@
                                 <div>{{ $order->id }}</div>
                             </div><div>
                                 <div class="uppercase font-bold">Total</div>
-                                <div>{{ presentPrice($order->billing_total) }}</div>
+                                <div>{{ $order->billing_total }}</div>
                             </div>
                         </div>
                         <div>
