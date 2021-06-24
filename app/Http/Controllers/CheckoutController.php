@@ -64,7 +64,7 @@ class CheckoutController extends Controller
             //encryption key set in the Merchant Access Portal
             $encryptionKey = ENV('PAYGATE_ENCRYPTION'); //'secret';
 
-            $DateTime = new DateTime();
+            //$DateTime = new DateTime();
 
             $data = array(
                 'PAYGATE_ID'        => ENV('PAYGATE_ID'), //10011072130,
@@ -72,7 +72,7 @@ class CheckoutController extends Controller
                 'AMOUNT'            => getNumbers()->get('newTotal') / 100,
                 'CURRENCY'          => 'ZAR',
                 'RETURN_URL'        => ENV('PAYGATE_RETURN_URL'),
-                'TRANSACTION_DATE'  => $DateTime->format('Y-m-d H:i:s'),
+                'TRANSACTION_DATE'  => date('Y-m-d H:i:s'),
                 'LOCALE'            => 'en-za',
                 'COUNTRY'           => 'ZAF',
                 'EMAIL'             => 'payment@dietitiansdiaries.com',
