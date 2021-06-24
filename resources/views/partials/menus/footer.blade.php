@@ -122,7 +122,7 @@
                         </div>-->
                        <div class="col-md-2"></div>
                         <div class="col-md-8">
-                            <a href="#"><img src="{{ 'https://mc2.box/ddshop/public/img/images/full.png' }}" style="height: 67px;" class="img-responsive"></a>
+                            <a href="#"><img src="{{ asset('public/img/images/full.png') }}" style="height: 67px;" class="img-responsive"></a>
                         </div>
                         <div class="col-md-2"></div>
                     </div>
