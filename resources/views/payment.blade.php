@@ -1,0 +1,305 @@
+@extends('layout3')
+
+@section('title', 'Payment')
+
+@section('extra-css')
+    <style>
+        .mt-32 {
+            margin-top: 32px;
+        }
+    </style>
+
+ <!--   <script src="https://js.stripe.com/v3/"></script>-->
+
+@endsection
+
+@section('content')
+
+    <div class="container">
+
+        @if (session()->has('success_message'))
+            <div class="spacer"></div>
+            <div class="alert alert-success">
+                {{ session()->get('success_message') }}
+            </div>
+        @endif
+
+        @if(count($errors) > 0)
+            <div class="spacer"></div>
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{!! $error !!}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <h1 class="checkout-heading stylish-heading">Payment</h1>
+        <div class="checkout-section">
+            
+            <div class="checkout-table-container">
+                <h2>Billing Details</h2>
+
+                <div class="checkout-table">
+                    <form action="https://secure.paygate.co.za/payweb3/process.trans" method="POST" id="payment-form">
+                        <input type="hidden" name="PAY_REQUEST_ID" value="{{ $PAY_REQUEST_ID }}">
+                        <input type="hidden" name="CHECKSUM" value="{{ $CHECKSUM }}">
+                     </form>
+                    <div class="checkout-table-row">
+                        <div class="checkout-table-row-left">
+                            <div class="checkout-item-details">
+                                <div class="checkout-table-item">{{ $order->billing_email }}</div>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="checkout-table-row">
+                        <div class="checkout-table-row-left">
+                            <div class="checkout-item-details">
+                                <div class="checkout-table-item">{{ $order->billing_name }}</div>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="checkout-table-row">
+                        <div class="checkout-table-row-left">
+                            <div class="checkout-item-details">
+                                <div class="checkout-table-item">{{ $order->billing_address }}</div>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="checkout-table-row">
+                        <div class="checkout-table-row-left">
+                            <div class="checkout-item-details">
+                                <div class="checkout-table-item">{{ $order->billing_city }}</div>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="checkout-table-row">
+                        <div class="checkout-table-row-left">
+                            <div class="checkout-item-details">
+                                <div class="checkout-table-item">{{ $order->billing_province }}</div>
+                            </div>
+                        </div> 
+                    </div> 
+                    <div class="checkout-table-row">
+                        <div class="checkout-table-row-left">
+                            <div class="checkout-item-details">
+                                <div class="checkout-table-item">{{ $order->billing_postalcode }}</div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="checkout-table-row">
+                        <div class="checkout-table-row-left">
+                            <div class="checkout-item-details">
+                                <div class="checkout-table-item">{{ $order->billing_phone }}</div>
+                            </div>
+                        </div> 
+                    </div> 
+                   
+                </div> <!-- end checkout-table -->
+
+                
+            </div>
+
+
+            <div class="checkout-table-container">
+                <h2>Your Order</h2>
+
+                <div class="checkout-table">
+                    @foreach ($order->products as $item)
+                    <?php
+                    //dd($item);
+                    ?>
+                    <div class="checkout-table-row">
+                        <div class="checkout-table-row-left">
+                            <div class="checkout-item-details">
+                                <div class="checkout-table-item">{{ $item->name }}</div>
+                                <div class="checkout-table-description">{{ $item->details }}</div>
+                                <div class="checkout-table-price">{{ $item->presentPrice() }}</div>
+                            </div>
+                        </div> <!-- end checkout-table -->
+
+                        <div class="checkout-table-row-right">
+                            <div class="checkout-table-quantity">{{ $item->pivot->quantity }}</div>
+                        </div>
+                    </div> <!-- end checkout-table-row -->
+                    @endforeach
+
+                </div> <!-- end checkout-table -->
+
+                <div class="checkout-totals">
+                    <div class="checkout-totals-left">
+                        Subtotal <br>
+                        @if (session()->has('coupon'))
+                            Discount ({{ session()->get('coupon')['name'] }}) :
+                            <br>
+                            <hr>
+                            New Subtotal <br>
+                        @endif
+                        Tax ({{config('cart.tax')}}%)<br>
+                        <span class="checkout-totals-total">Total</span>
+
+                    </div>
+
+                    <div class="checkout-totals-right">
+                        {{ presentPrice(Cart::subtotal()) }} <br>
+                        @if (session()->has('coupon'))
+                            -{{ presentPrice($discount) }} <br>
+                            <hr>
+                            {{ presentPrice($newSubtotal) }} <br>
+                        @endif
+                        {{ presentPrice($newTax) }} <br>
+                        <span class="checkout-totals-total">{{ presentPrice($newTotal) }}</span>
+
+                    </div>
+                </div> <!-- end checkout-totals -->
+            </div>
+            <div class="spacer"></div>
+            <button type="submit" id="complete-order" onclick="myFunction()" class="button-primary full-width">Proceed to Payment</button>
+
+        </div> <!-- end checkout-section -->
+    </div>
+
+@endsection
+
+@section('extra-js')
+<script>
+function myFunction() {
+  document.getElementById("payment-form").submit();
+}
+</script>
+<?php
+/*    <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
+
+    <script>
+        (function(){
+            // Create a Stripe client
+            var stripe = Stripe('{{ config('services.stripe.key') }}');
+
+            // Create an instance of Elements
+            var elements = stripe.elements();
+
+            // Custom styling can be passed to options when creating an Element.
+            // (Note that this demo uses a wider set of styles than the guide below.)
+            var style = {
+              base: {
+                color: '#32325d',
+                lineHeight: '18px',
+                fontFamily: '"Roboto", Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                  color: '#aab7c4'
+                }
+              },
+              invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+              }
+            };
+
+            // Create an instance of the card Element
+            var card = elements.create('card', {
+                style: style,
+                hidePostalCode: true
+            });
+
+            // Add an instance of the card Element into the `card-element` <div>
+            card.mount('#card-element');
+
+            // Handle real-time validation errors from the card Element.
+            card.addEventListener('change', function(event) {
+              var displayError = document.getElementById('card-errors');
+              if (event.error) {
+                displayError.textContent = event.error.message;
+              } else {
+                displayError.textContent = '';
+              }
+            });
+
+            // Handle form submission
+            var form = document.getElementById('payment-form');
+            form.addEventListener('submit', function(event) {
+              event.preventDefault();
+
+              // Disable the submit button to prevent repeated clicks
+              document.getElementById('complete-order').disabled = true;
+
+              var options = {
+                name: document.getElementById('name_on_card').value,
+                address_line1: document.getElementById('address').value,
+                address_city: document.getElementById('city').value,
+                address_state: document.getElementById('province').value,
+                address_zip: document.getElementById('postalcode').value
+              }
+
+              stripe.createToken(card, options).then(function(result) {
+                if (result.error) {
+                  // Inform the user if there was an error
+                  var errorElement = document.getElementById('card-errors');
+                  errorElement.textContent = result.error.message;
+
+                  // Enable the submit button
+                  document.getElementById('complete-order').disabled = false;
+                } else {
+                  // Send the token to your server
+                  stripeTokenHandler(result.token);
+                }
+              });
+            });
+
+            function stripeTokenHandler(token) {
+              // Insert the token ID into the form so it gets submitted to the server
+              var form = document.getElementById('payment-form');
+              var hiddenInput = document.createElement('input');
+              hiddenInput.setAttribute('type', 'hidden');
+              hiddenInput.setAttribute('name', 'stripeToken');
+              hiddenInput.setAttribute('value', token.id);
+              form.appendChild(hiddenInput);
+
+              // Submit the form
+              form.submit();
+            }
+
+            // PayPal Stuff
+            var form = document.querySelector('#paypal-payment-form');
+            var client_token = "{{ $paypalToken }}";
+
+            braintree.dropin.create({
+              authorization: client_token,
+              selector: '#bt-dropin',
+              paypal: {
+                flow: 'vault'
+              }
+            }, function (createErr, instance) {
+              if (createErr) {
+                console.log('Create Error', createErr);
+                return;
+              }
+
+              // remove credit card option
+              var elem = document.querySelector('.braintree-option__card');
+              elem.parentNode.removeChild(elem);
+
+              form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                instance.requestPaymentMethod(function (err, payload) {
+                  if (err) {
+                    console.log('Request Payment Method Error', err);
+                    return;
+                  }
+
+                  // Add the nonce to the form and submit
+                  document.querySelector('#nonce').value = payload.nonce;
+                  form.submit();
+                });
+              });
+            });
+
+        })();
+    </script>
+ * 
+ */
+?>
+@endsection
