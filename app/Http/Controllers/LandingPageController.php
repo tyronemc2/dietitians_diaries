@@ -20,4 +20,10 @@ class LandingPageController extends Controller
 
         return view('landing-page2')->with(['products' => $products, 'pages' => $pages]);
     }
+    public function terms()
+    {
+        $page = Page::where('status', 'ACTIVE')->where('slug', 'terms')->get();
+
+        return view('terms')->with(['page' => $page]);
+    }
 }

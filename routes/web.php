@@ -1,6 +1,7 @@
 <?php
 
 Route::get('/', 'LandingPageController@index')->name('landing-page');
+//Route::get('/terms', 'LandingPageController@terms')->name('terms');
 
 Route::get('/shop', 'ShopController@index')->name('shop.index');
 Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');

@@ -613,70 +613,20 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                foreach($pages as $page){
+                if($page->slug == 'learn'){ ?>
                 <div class="row wow animated fadeInUp" data-wow-delay="0.5s">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <p class="procap"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                        <p class="procap"> {{ $page->excerpt }} </p>
                     </div>
-                    <div id="owl-news">
-                        <div class="item">
-                            <figure> <img src="http://placehold.it/622x640" alt="images" /> </figure>
-                            <h4> <a href="news-detail.html"> Politicians seek </a> </h4>
-                            <ul>
-                                <li> <a href="#"> #photography </a> </li>
-                                <li> <a href="#"> #view </a> </li>
-                                <li> <a href="#"> #architecture</a> </li>
-                            </ul>
-                            <div class="news-comments">
-                                <a href="#"> <i class="fa fa-comment" aria-hidden="true"></i> 27 </a>
-                                <a href="#"> <i class="fa fa-eye" aria-hidden="true"></i> 343 </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <figure> <img src="http://placehold.it/622x640" alt="images" /> </figure>
-                            <h4> <a href="news-detail.html"> Politicians seek </a> </h4>
-                            <ul>
-                                <li> <a href="#"> #photography </a> </li>
-                                <li> <a href="#"> #view </a> </li>
-                                <li> <a href="#"> #architecture</a> </li>
-                            </ul>
-                            <div class="news-comments">
-                                <a href="#"> <i class="fa fa-comment" aria-hidden="true"></i> 27 </a>
-                                <a href="#"> <i class="fa fa-eye" aria-hidden="true"></i> 343 </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <figure> <img src="http://placehold.it/622x640" alt="images" /> </figure>
-                            <h4> <a href="news-detail.html"> Politicians seek </a> </h4>
-                            <ul>
-                                <li> <a href="#"> #photography </a> </li>
-                                <li> <a href="#"> #view </a> </li>
-                                <li> <a href="#"> #architecture</a> </li>
-                            </ul>
-                            <div class="news-comments">
-                                <a href="#"> <i class="fa fa-comment" aria-hidden="true"></i> 27 </a>
-                                <a href="#"> <i class="fa fa-eye" aria-hidden="true"></i> 343 </a>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <figure> <img src="http://placehold.it/622x640" alt="images" /> </figure>
-                            <h4> <a href="news-detail.html"> Politicians seek </a> </h4>
-                            <ul>
-                                <li> <a href="#"> #photography </a> </li>
-                                <li> <a href="#"> #view </a> </li>
-                                <li> <a href="#"> #architecture</a> </li>
-                            </ul>
-                            <div class="news-comments">
-                                <a href="#"> <i class="fa fa-comment" aria-hidden="true"></i> 27 </a>
-                                <a href="#"> <i class="fa fa-eye" aria-hidden="true"></i> 343 </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="news-fill-btn">
-                            <a href="news.html" class="fill-btn">View more article</a>
-                        </div>
-                    </div>
+                    
+                    
                 </div>
+                <?php
+                }
+                }
+                ?>
             </div>
         </section>
         <!-- news Section Ends -->

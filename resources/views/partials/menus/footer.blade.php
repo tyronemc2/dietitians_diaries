@@ -37,16 +37,21 @@
                         <div class="contact-address btm-brdr">
                             <h4 class="fTitle"> Contact <span>Us</span> </h4>
                             <ul>
-                                <li> <i class="fa fa-phone" aria-hidden="true"></i> <span>1800 987 65 43</span> </li>
-                                <li> <i class="fa fa-map-marker" aria-hidden="true"></i> <span>121 King St, Melbourne VIC 3000, Australia</span> </li>
+                                <li> <i class="fa fa-phone" aria-hidden="true"></i> <span>072 658 8802</span> </li>
+                                <li> <i class="fa fa-map-marker" aria-hidden="true"></i> <span>1 Hills Ave, Ballito, KZN, South Africa</span> </li>
                                 <li>
-                                    <a href="#"> <i class="fa fa-envelope-o" aria-hidden="true"></i> <span>info@gym.com</span> </a>
+                                    <a href="#"> <i class="fa fa-envelope-o" aria-hidden="true"></i> <span>jessica@dietitiansdiaries.com</span> </a>
                                 </li>
                             </ul>
+                            <a href="{{ 'http://www.dietitiansdiaries.com/page/terms' }}">
+                        
+                            <h4 class="fTitle"> Terms and <span>Conditions</span> </h4>
+                            </a>
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        
+                        <!--
                         <div class="widget widget_calculator wow animated fadeInUp" data-wow-delay="0.5s">
                             <h4 class="fTitle"> Calculate your <span>Body Mass Index</span> </h4>
                             <form>
@@ -80,7 +85,7 @@
                                     <button type="button" class="fill-btn">Calculate</button>
                                 </div>
                             </form>
-                        </div> 
+                        </div> -->
                         <!--<div class="subscribe btm-brdr">
                             <h4 class="fTitle"> Subscribe <span>Newsletter</span> </h4>
                             <form>
@@ -108,6 +113,18 @@
                                 </li>
                             </ul>
                         </div>-->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 project_images">
+                       <!-- <div class="text-center">
+                            <h3 class="border-success"></h3>
+                        </div>-->
+                       <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <a href="#"><img src="{{ 'https://mc2.box/ddshop/public/img/images/full.png' }}" style="height: 67px;" class="img-responsive"></a>
+                        </div>
+                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>
