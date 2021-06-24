@@ -9,7 +9,7 @@ Thank you for your order.
 
 **Order Name:** {{ $order->billing_name }}
 
-**Order Total:** ${{ round($order->billing_total / 100, 2) }}
+**Order Total:** R{{ round($order->billing_total) }}
 
 **Items Ordered**
 
