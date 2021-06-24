@@ -150,8 +150,7 @@ class CheckoutController extends Controller
                 'newTotal' => getNumbers()->get('newTotal'),
             ]);
             
-        //    return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
-        
+        //    
 
             } catch (CardErrorException $e) {
                 $this->addToOrdersTables($request, $e->getMessage());
@@ -184,7 +183,14 @@ class CheckoutController extends Controller
             $order->status = $request->TRANSACTION_STATUS;
             $order->paygate_status = $statuses[$request->TRANSACTION_STATUS];
             $order->save();
-
+            //
+            if($order->paygate_status == 1){
+                return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
+            }else{
+                return redirect()->route('confirmation.index')->with('error_message', 'Your payment was not accepted!');
+            }
+        }else{
+            return redirect()->route('confirmation.index')->with('error_message', 'Your payment was not accepted!');
         }
     }
 
