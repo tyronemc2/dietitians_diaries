@@ -102,7 +102,10 @@ class CheckoutController extends Controller
 
             //execute post
             $result = curl_exec($ch);
-
+echo "<pre>";
+print_r($result);
+echo "</pre>";
+exit();
             //close connection
             curl_close($ch);
             //
