@@ -157,36 +157,44 @@
                     </div>-->
                     <div id="classbox" class="grid clickable clearfix">
                         <div class="elemnt celement col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <div class="element">
+                            <a href="https://www.dietitiansdiaries.com/page/online-consultations">
+                                <div class="element">
                                 <i class="fIcons flaticon-waist"></i>
                                 <h4> Online Consultation </h4>
                             <!--    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </p>
                                 <div class="element-btn"><button type="button" class="element-fill-btn">Join this class</button></div> -->
-                            </div>
+                                </div>
+                            </a>
                         </div>
                         <div class="elemnt celement col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <div class="element">
+                            <a href="https://www.dietitiansdiaries.com/page/online-consultations">
+                                <div class="element">
                                 <i class="fIcons flaticon-arm"></i>
                                 <h4> Online follow up Consultation </h4>
                             <!--    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </p>
                                 <div class="element-btn"><button type="button" class="element-fill-btn">Join this class</button></div> -->
-                            </div>
+                                </div>
+                            </a>
                         </div>
                         <div class="elemnt celement col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <div class="element">
+                            <a href="https://www.dietitiansdiaries.com/page/optifast-meal-replacements">
+                                <div class="element">
                                 <i class="fIcons flaticon-blender"></i>
                                     <h4> OPTIFAST® meal replacements </h4>
                         <!--        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </p>
                                 <div class="element-btn"><button type="button" class="element-fill-btn">Join this class</button></div> -->
-                            </div>
+                                </div>
+                            </a>
                         </div>
                         <div class="elemnt celement col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <div class="element">
+                            <a href="https://www.dietitiansdiaries.com/page/body-composition">
+                                <div class="element">
                                 <i class="fIcons flaticon-scales"></i>
                                 <h4> Body Composition assessment </h4>
                         <!--        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </p>
                                 <div class="element-btn"><button type="button" class="element-fill-btn">Join this class</button></div>-->
-                            </div>
+                                </div>
+                            </a>
                         </div>
                        
                     </div>
