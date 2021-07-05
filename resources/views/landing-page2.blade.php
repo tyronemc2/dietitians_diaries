@@ -484,7 +484,7 @@
         </section>
         <!-- Products Section Ends -->
 
-        <!-- Call To Action Section Begins -->
+        <!-- Call To Action Section Begins 
         <section id="call-to-action" class="call-to-action pad-top-115 pad-bottom-115">
             <div class="actionBg parallax"></div>
             <div class="container pr">
@@ -507,9 +507,9 @@
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow animated fadeInUp" data-wow-delay="0.5s">
                         <button type="button" class="fill-btn">Start Today</button>
                     </div>
-                </div> -->
+                </div> 
             </div>
-        </section>
+        </section>-->
         <!-- Call To Action Section Ends -->
 
         <!-- Plans Section Begins -->

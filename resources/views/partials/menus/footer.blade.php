@@ -8,6 +8,8 @@
                             Dietitians Diaries
                         </div>
                     </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+                    
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="contact-form btm-brdr">
                             <div class="form-Box">
@@ -50,8 +52,10 @@
                             
                         </div>
                     </div>
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
+                   <!-- 
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <!--
+                        
                         <div class="widget widget_calculator wow animated fadeInUp" data-wow-delay="0.5s">
                             <h4 class="fTitle"> Calculate your <span>Body Mass Index</span> </h4>
                             <form>
@@ -112,8 +116,8 @@
                                     <a href="'#" target="_blank"> <i class="fa fa-google-plus" aria-hidden="true"></i> </a>
                                 </li>
                             </ul>
-                        </div>-->
-                    </div>
+                        </div>
+                    </div>-->
                 </div>
                 <div class="row">
                     <div class="col-md-12 project_images">
