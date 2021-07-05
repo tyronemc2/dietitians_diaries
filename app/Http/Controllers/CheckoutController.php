@@ -209,7 +209,7 @@ class CheckoutController extends Controller
             'payment_gateway' => 'paygate',
             'billing_discount' => getNumbers()->get('discount'),
             'billing_discount_code' => getNumbers()->get('code'),
-            'billing_subtotal' => getNumbers()->get('newSubtotal'),
+            'billing_subtotal' => getNumbers()->get('newSubtotal')/100,
             'billing_tax' => getNumbers()->get('newTax')/100,
             'billing_total' => getNumbers()->get('newTotal')/100,
             'error' => $error,
