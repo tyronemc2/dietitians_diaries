@@ -31,15 +31,15 @@ class OrderPlaced extends Mailable
      */
     public function build()
     {
-        return $this->to($this->order->billing_email, $this->order->billing_name)
+        $path = storage_path().'/app/public/';
+        $mail = $this->to($this->order->billing_email, $this->order->billing_name)
                     ->bcc('jessica@dietitiansdiaries.com')
                     ->subject('Order from Dietitians Diaries')
                     ->markdown('emails.orders.placed');
                     foreach($this->order->products as $product){
                         if ($product->meal_plans) {
                             $files = json_decode($product->meal_plans);
-
-                                $this->attach(productImage($files[0]->download_link), [
+                               $mail = $mail->attach($path.$files[0]->download_link, [
                                     'as' => $files[0]->original_name, 
                                     'mime' => 'application/pdf'
                                 ]);
@@ -47,12 +47,13 @@ class OrderPlaced extends Mailable
                         if ($product->workout_plans) {
                             $files = json_decode($product->workout_plans);
 
-                                $this->attach(productImage($files[0]->download_link), [
+                                $mail = $mail->attach($path.$files[0]->download_link, [
                                     'as' => $files[0]->original_name, 
                                     'mime' => 'application/pdf'
                                 ]);
 
                         }
                     }
+                    return $mail;
     }
 }
