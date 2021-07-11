@@ -39,17 +39,16 @@ class OrderPlaced extends Mailable
                         if ($product->meal_plans) {
                             $files = json_decode($product->meal_plans);
 
-                                $this->attach(productImage($files['download_link']), [
-                                    'as' => $files['origninal_name'], 
+                                $this->attach(productImage($files[0]->download_link), [
+                                    'as' => $files[0]->original_name, 
                                     'mime' => 'application/pdf'
                                 ]);
-
                         }
                         if ($product->workout_plans) {
                             $files = json_decode($product->workout_plans);
 
-                                $this->attach(productImage($files['download_link']), [
-                                    'as' => $files['origninal_name'], 
+                                $this->attach(productImage($files[0]->download_link), [
+                                    'as' => $files[0]->original_name, 
                                     'mime' => 'application/pdf'
                                 ]);
 
