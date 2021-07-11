@@ -39,8 +39,8 @@ class OrderPlaced extends Mailable
                         $files = json_decode($this->order->products->meal_plans);
                         
                             $this->attach(productImage($files['download_link']), [
-                                'as' => $file->getClientOriginalName(), 
-                                'mime' => $file->getMimeType()
+                                'as' => $files['origninal_name'], 
+                                'mime' => 'application/pdf'
                             ]);
                        
                     }
@@ -48,8 +48,8 @@ class OrderPlaced extends Mailable
                         $files = json_decode($this->order->products->workout_plans);
                         
                             $this->attach(productImage($files['download_link']), [
-                                'as' => $file->getClientOriginalName(), 
-                                'mime' => $file->getMimeType()
+                                'as' => $files['origninal_name'], 
+                                'mime' => 'application/pdf'
                             ]);
                        
                     }
