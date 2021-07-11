@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Page;
+use TCG\Voyager\Models\Post;
 
 class LandingPageController extends Controller
 {
@@ -17,8 +18,9 @@ class LandingPageController extends Controller
     {
         $products = Product::take(3)->inRandomOrder()->get();
         $pages = Page::where('status', 'ACTIVE')->get();
+        $success = Post::where('category_id', 1)->where('status', 'PUBLISHED')->get();
 
-        return view('landing-page2')->with(['products' => $products, 'pages' => $pages]);
+        return view('landing-page2')->with(['products' => $products, 'pages' => $pages, 'success' => $success]);
     }
     public function terms()
     {

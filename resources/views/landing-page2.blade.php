@@ -577,26 +577,23 @@
                         </div>
                         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
                         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            
                             <div class="clientSlide">
                                 <div id="owl-testimonial" class="testimonial-slider">
+                                    <?php
+                            foreach($success as $story){
+                            ?>
+        
                                     <div class="item">
-                                        <img src="http://placehold.it/403x380" alt="images" />
+                                        <img src="{{ productImage($story->image) }}" alt="images" />
                                         <div class="spacer left">
                                             <div class="mask"></div>
                                         </div>
-                                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi t aliquip ex ea commodo consequat. </p>
-                                        <h4> Aena Deo </h4>
-                                        <h5> Lost 20 LBS in 2 Months </h5>
+                                        <p> {{-- $story->body --}}</p>
+                                        <h4> {{ $story->body }} </h4>
+                                        <h5> {{ $story->excerpt }} </h5>
                                     </div>
-                                    <div class="item">
-                                        <img src="http://placehold.it/403x380" alt="images" />
-                                        <div class="spacer left">
-                                            <div class="mask"></div>
-                                        </div>
-                                        <p> In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. </p>
-                                        <h4> Tami Flores </h4>
-                                        <h5> Lost 25 LBS in 3 Months </h5>
-                                    </div>
+                            <?php } ?>
                                 </div>
                             </div>
                             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-12"></div>
