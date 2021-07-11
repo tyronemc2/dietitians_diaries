@@ -589,8 +589,8 @@
                                         <div class="spacer left">
                                             <div class="mask"></div>
                                         </div>
-                                        <p> {{-- $story->body --}}</p>
-                                        <h4> {{ $story->body }} </h4>
+                                     <!--   <p> {{-- $story->body --}}</p> -->
+                                        <h4> {!! $story->body !!} </h4>
                                         <h5> {{ $story->excerpt }} </h5>
                                     </div>
                             <?php } ?>
