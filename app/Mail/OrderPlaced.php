@@ -35,23 +35,25 @@ class OrderPlaced extends Mailable
                     ->bcc('jessica@dietitiansdiaries.com')
                     ->subject('Order from Dietitians Diaries')
                     ->markdown('emails.orders.placed');
-                    if ($this->order->products->meal_plans) {
-                        $files = json_decode($this->order->products->meal_plans);
-                        
-                            $this->attach(productImage($files['download_link']), [
-                                'as' => $files['origninal_name'], 
-                                'mime' => 'application/pdf'
-                            ]);
-                       
-                    }
-                    if ($this->order->products->workout_plans) {
-                        $files = json_decode($this->order->products->workout_plans);
-                        
-                            $this->attach(productImage($files['download_link']), [
-                                'as' => $files['origninal_name'], 
-                                'mime' => 'application/pdf'
-                            ]);
-                       
+                    foreach($this->order->products as $product){
+                        if ($product->meal_plans) {
+                            $files = json_decode($product->meal_plans);
+
+                                $this->attach(productImage($files['download_link']), [
+                                    'as' => $files['origninal_name'], 
+                                    'mime' => 'application/pdf'
+                                ]);
+
+                        }
+                        if ($product->workout_plans) {
+                            $files = json_decode($product->workout_plans);
+
+                                $this->attach(productImage($files['download_link']), [
+                                    'as' => $files['origninal_name'], 
+                                    'mime' => 'application/pdf'
+                                ]);
+
+                        }
                     }
     }
 }
