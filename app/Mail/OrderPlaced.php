@@ -35,5 +35,23 @@ class OrderPlaced extends Mailable
                     ->bcc('jessica@dietitiansdiaries.com')
                     ->subject('Order from Dietitians Diaries')
                     ->markdown('emails.orders.placed');
+                    if ($this->order->products->meal_plans) {
+                        $files = json_decode($this->order->products->meal_plans);
+                        
+                            $this->attach(productImage($files['download_link']), [
+                                'as' => $file->getClientOriginalName(), 
+                                'mime' => $file->getMimeType()
+                            ]);
+                       
+                    }
+                    if ($this->order->products->workout_plans) {
+                        $files = json_decode($this->order->products->workout_plans);
+                        
+                            $this->attach(productImage($files['download_link']), [
+                                'as' => $file->getClientOriginalName(), 
+                                'mime' => $file->getMimeType()
+                            ]);
+                       
+                    }
     }
 }
