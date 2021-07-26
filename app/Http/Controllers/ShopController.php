@@ -24,6 +24,7 @@ class ShopController extends Controller
             });
             $categoryName = optional($categories->where('slug', request()->category)->first())->name;
             $featured_products = Product::with('categories')->where('featured', 1);
+            $featured_categoryName = 'Featured';
             
         } else {
             $featured_products = Product::with('categories')->where('featured', 1);
