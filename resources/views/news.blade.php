@@ -45,7 +45,7 @@
                         if($x > 3){
                             continue;
                         }
-                        $url = 'https://www.dietitiansdiaries.com/post_view/'.$post->slug;
+                        $url = 'https://www.dietitiansdiaries.com/view_post/'.$post->slug;
                         $pieces = explode(",", $post->meta_keywords);
                     
                     
@@ -88,7 +88,7 @@
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 news-list-left">
                         <?php
                     foreach($posts as $post){ 
-                        $url = 'https://www.dietitiansdiaries.com/post_view/'.$post->slug;
+                        $url = 'https://www.dietitiansdiaries.com/view_post/'.$post->slug;
                         $pieces = explode(",", $post->meta_keywords);
                     
                     
@@ -188,7 +188,7 @@
                                     if($x > 3){
                                         continue;
                                     }
-                                    $url = 'https://www.dietitiansdiaries.com/post_view/'.$post->slug;
+                                    $url = 'https://www.dietitiansdiaries.com/view_post/'.$post->slug;
                                     $pieces = explode(",", $post->meta_keywords);
 
 
