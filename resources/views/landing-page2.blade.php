@@ -634,13 +634,13 @@
                 foreach($learn as $learn_post){
                     //
                     $pieces = explode(",", $learn_post->meta_keywords);
-                    $url = 'https://www.dietitiansdiaries.com/post_view/'.$learn_post->slug;
+                    $url = 'https://www.dietitiansdiaries.com/view_post/'.$learn_post->slug;
                 
                     
                 ?>
                         <div class="item">
                             <figure> <img src="{{ productImage($learn_post->image) }}" alt="images" /> </figure>
-                            <h4> <a href="news-detail.html"> {{ $learn_post->title }} </a> </h4>
+                            <h4> <a href="{{ $url }}"> {{ $learn_post->title }} </a> </h4>
                             <ul>
                                 <?php
                                 foreach($pieces as $piece){ 
