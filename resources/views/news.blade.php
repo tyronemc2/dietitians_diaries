@@ -206,6 +206,7 @@
                             <h5 class="widget-title">FEATURED Tags</h5>
                             <div class="tagcloud">
                                 <?php
+                                $x = 0;
                                 foreach($posts as $post){ 
                         
                                     $x++;
