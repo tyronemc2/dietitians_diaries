@@ -147,14 +147,11 @@
                         <div class="widget widget_tag_cloud wow animated fadeInUp" data-wow-delay="0.5s">
                             <h5 class="widget-title">FEATURED Tags</h5>
                             <div class="tagcloud">
-                                <a href="#" class="tag-link">Fitness</a>
-                                <a href="#" class="tag-link">Gym</a>
-                                <a href="#" class="tag-link">Yoga</a>
-                                <a href="#" class="tag-link">Offers</a>
-                                <a href="#" class="tag-link">Shedule</a>
-                                <a href="#" class="tag-link">Plans</a>
-                                <a href="#" class="tag-link">Workout</a>
-                                <a href="#" class="tag-link">Accessories</a>
+                                <?php
+                                $pieces = explode(",", $post->meta_keywords);
+                                foreach($pieces as $piece){ ?>
+                                <a href="#" class="tag-link">{{ $piece }}</a>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
