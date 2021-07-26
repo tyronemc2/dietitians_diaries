@@ -13,7 +13,7 @@
     <link type="text/css" href="{{ asset('css/animate.css?v=1.0')}}" rel="stylesheet" />
     <link type="text/css" rel="stylesheet" href="{{ asset('css/owl.carousel.min.css?v=1.0')}}">
     <link type="text/css" rel="stylesheet" href="{{ asset('css/jquery.fancybox.css?v=1.0')}}">
-    <link type="text/css" rel="stylesheet" href="{{ asset('webkit/webkit.css?v=1.0')}}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/webkit/webkit.css?v=1.0')}}">
     <link type="text/css" rel="stylesheet" href="{{ asset('css/font-awesome.css?v=1.0')}}">
     <link type="text/css" href="{{ asset('css/style.css?v=1.0')}}" rel="stylesheet" />
     <link type="text/css" href="{{ asset('css/media.css?v=1.0')}}" rel="stylesheet" />
