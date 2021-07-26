@@ -42,6 +42,9 @@ Route::get('/search', 'ShopController@search')->name('search');
 
 Route::get('/search-algolia', 'ShopController@searchAlgolia')->name('search-algolia');
 
+Route::get('/view_news', 'PostsController@news')->name('view_news');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/my-profile', 'UsersController@edit')->name('users.edit');
     Route::patch('/my-profile', 'UsersController@update')->name('users.update');
@@ -54,7 +57,12 @@ Route::get('/page/{slug}', [
 	'uses' => 'PagesController@getPage'
 ])->where('slug', '([A-Za-z0-9\-\/]+)');
 // Catch all page controller (place at the very bottom)
+Route::get('/view_post/{slug}', [
+	'uses' => 'PostsController@viewPost'
+])->where('slug', '([A-Za-z0-9\-\/]+)');
+
 Route::get('/post/{slug}', [
 	'uses' => 'PostsController@getPost'
 ])->where('slug', '([A-Za-z0-9\-\/]+)');
+
 

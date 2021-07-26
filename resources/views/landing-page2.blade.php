@@ -34,15 +34,16 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding">
                         <div>
-                            <figure><img src="{{ asset('public/img/images/salad_2000.jpg')}}" alt="image" /></figure>
-                           <!-- <div class="boxInfo">
+                            <figure><img src="{{ asset('public/img/images/apple_2000.jpg')}}" alt="image" /></figure>
+                            <!-- <div class="boxInfo">
                                 <h3> Dite Tips </h3>
                             </div> -->
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-padding">
-                        <div >
-                            <figure><img src="{{ asset('public/img/images/apple_2000.jpg')}}" alt="image" /></figure>
+                        <div>
+                            <figure><img src="{{ asset('public/img/images/salad_2000.jpg')}}" alt="image" /></figure>
+                           
                             <!--<div class="boxInfo">
                                 <h3> Training Like a Pro </h3>
                             </div>-->
@@ -167,7 +168,7 @@
                             </a>
                         </div>
                         <div class="elemnt celement col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                            <a href="https://www.dietitiansdiaries.com/page/online-consultations">
+                            <a href="https://www.dietitiansdiaries.com/page/Online-follow-up-consultation">
                                 <div class="element">
                                 <i class="fIcons flaticon-arm"></i>
                                 <h4> Online follow up Consultation </h4>
@@ -625,13 +626,46 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <p class="procap"> {{ $page->excerpt }} </p>
                     </div>
-                    
-                    
-                </div>
                 <?php
                 }
-                }
+                } ?>
+                <div id="owl-news">
+                <?php    
+                foreach($learn as $learn_post){
+                    //
+                    $pieces = explode(",", $learn_post->meta_keywords);
+                    $url = 'https://www.dietitiansdiaries.com/post_view/'.$learn_post->slug;
+                
+                    
                 ?>
+                        <div class="item">
+                            <figure> <img src="{{ productImage($learn_post->image) }}" alt="images" /> </figure>
+                            <h4> <a href="news-detail.html"> {{ $learn_post->title }} </a> </h4>
+                            <ul>
+                                <?php
+                                foreach($pieces as $piece){ 
+                                    
+                               ?>
+                                <li> <a href="{{ $url }}"> <?php echo "#".$piece;?> </a> </li>
+                            <!--<div class="news-comments">
+                                <a href="#"> <i class="fa fa-comment" aria-hidden="true"></i> 27 </a>
+                                <a href="#"> <i class="fa fa-eye" aria-hidden="true"></i> 343 </a>
+                            </div>-->
+                            <?php } ?>
+                           </ul> 
+                        </div>
+                        
+                    
+                <?php } ?>
+                        </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="news-fill-btn">
+                            <a href="https://www.dietitiansdiaries.com/view_news" class="fill-btn">View more articles</a>
+                        </div>
+                    </div>
+                                
+                </div>
+                
             </div>
         </section>
         <!-- news Section Ends -->

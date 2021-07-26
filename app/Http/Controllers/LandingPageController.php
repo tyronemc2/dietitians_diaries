@@ -19,8 +19,9 @@ class LandingPageController extends Controller
         $products = Product::take(3)->inRandomOrder()->get();
         $pages = Page::where('status', 'ACTIVE')->get();
         $success = Post::where('category_id', 1)->where('status', 'PUBLISHED')->get();
+        $learn = Post::where('category_id', 3)->where('status', 'PUBLISHED')->get();
 
-        return view('landing-page2')->with(['products' => $products, 'pages' => $pages, 'success' => $success]);
+        return view('landing-page2')->with(['products' => $products, 'pages' => $pages, 'success' => $success, 'learn' => $learn]);
     }
     public function terms()
     {
