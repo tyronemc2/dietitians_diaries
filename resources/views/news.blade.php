@@ -217,7 +217,7 @@
                                     $pieces = explode(",", $post->meta_keywords);
                     
                                     foreach($pieces as $piece){ ?>
-                                        <a href="#" class="tag-link">{{ $piece }}</a>
+                                        <a href="{{ $url }}" class="tag-link">{{ $piece }}</a>
                                     <?php }
                                 } ?>
                             </div>
