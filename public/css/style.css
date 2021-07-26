@@ -1257,7 +1257,7 @@ header.fixed .menuBar .navbar-right {
 }
 
 .box.box-1 {
-    background-color: #ffe402;
+    background-color: #d6a3a3;
 }
 
 .box.box-2 {
@@ -1379,7 +1379,7 @@ header.fixed .menuBar .navbar-right {
 }
 
 .button-group {
-    background-color: #ffe402;
+    background-color: #d6a3a3;
     display: inline-block;
     position: relative;
     transform: skew(-29.6deg);
@@ -1553,7 +1553,7 @@ header.fixed .menuBar .navbar-right {
     padding: 14px;
     font-size: 12px;
     text-transform: uppercase;
-    color: #ffe402;
+    color: #d6a3a3;
     font-weight: 700;
     letter-spacing: 0.72px;
     /*-webkit-transform: perspective(300px) rotateX(29.6deg);
@@ -1967,7 +1967,7 @@ header.fixed .menuBar .navbar-right {
     content: "\f178";
     display: inline-block;
     font-size: 30px;
-    color: #ffe402;
+    color: #d6a3a3;
     line-height: normal;
     transform: skew(29.6deg);
     -webkit-transform: skew(29.6deg);
@@ -1986,7 +1986,7 @@ header.fixed .menuBar .navbar-right {
     content: "\f177";
     display: inline-block;
     font-size: 30px;
-    color: #ffe402;
+    color: #d6a3a3;
     line-height: normal;
     transform: skew(29.6deg);
     -webkit-transform: skew(29.6deg);
@@ -2128,7 +2128,7 @@ header.fixed .menuBar .navbar-right {
 }
 
 .call-to-action .fill-btn:hover {
-    background-color: #ffe402;
+    background-color: #d6a3a3;
     box-shadow: 0px 10px 50px -10px rgb(254, 227, 1);
     color: #201f1f;
 }
@@ -2271,7 +2271,7 @@ header.fixed .menuBar .navbar-right {
 }
 
 .pricebox .midelement h5 {
-    color: #ffe402;
+    color: #d6a3a3;
 }
 
 .pricebox .midelement .skewback {
@@ -2293,7 +2293,7 @@ header.fixed .menuBar .navbar-right {
 }
 
 .pricebox .midelement .fill-btn:hover {
-    background-color: #ffe402;
+    background-color: #d6a3a3;
     box-shadow: 0px 10px 50px -10px rgb(255, 228, 2);
     color: #201f1f;
 }
@@ -2399,7 +2399,7 @@ header.fixed .menuBar .navbar-right {
     display: inline-block !important;
     font-size: 0;
     width: 60px;
-    background-color: #ffe402;
+    background-color: #d6a3a3;
     transform: skew(-29.6deg);
     -webkit-transform: skew(-29.6deg);
     -moz-transform: skew(-29.6deg);
@@ -2601,7 +2601,7 @@ header.fixed .menuBar .navbar-right {
 
 .form-Box .fill-btn:hover,
 .subscribe form .fill-btn:hover {
-    background-color: #ffe402;
+    background-color: #d6a3a3;
     color: #201f1f;
     box-shadow: 0px 10px 50px -10px rgb(255, 228, 2);
 }
@@ -3175,7 +3175,7 @@ header.fixed .menuBar .navbar-right {
 #owl-news-list .owl-prev {
     display: block !important;
     font-size: 0;
-    background-color: #ffe402;
+    background-color: #d6a3a3;
     transform: skew(-29.6deg);
     -webkit-transform: skew(-29.6deg);
     -moz-transform: skew(-29.6deg);
