@@ -204,7 +204,7 @@ class CheckoutController extends Controller
                             $downloads->product_id = $product->id;
                             $downloads->file = $files[0]->download_link;
                             $downloads->name = $product->name.' Meal Plans';
-                            $downloads->hash = Hash::make($files[0]->download_link);
+                            $downloads->hash = str_replace ('/', '', Hash::make($files[0]->download_link));
                             $downloads->expiry_date = date('Y-m-d',strtotime('+14 days'));
                             $downloads->save();
 
@@ -223,7 +223,7 @@ class CheckoutController extends Controller
                             $downloads->product_id = $product->id;
                             $downloads->file = $files[0]->download_link;
                             $downloads->name = $product->name.' Workout Plans';
-                            $downloads->hash = Hash::make($files[0]->download_link);
+                            $downloads->hash = str_replace ('/', '', Hash::make($files[0]->download_link));
                             $downloads->expiry_date = date('Y-m-d',strtotime('+14 days'));
                             $downloads->save();
 
