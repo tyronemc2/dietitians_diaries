@@ -91,7 +91,7 @@ class CheckoutController extends Controller
             $the_order->save();
 
             $fieldsString = http_build_query($data);
-/*
+
             //open connection
             $ch = curl_init();
 
@@ -128,13 +128,12 @@ class CheckoutController extends Controller
                 $the_order->pay_request_id = $output['PAY_REQUEST_ID'];
                 $the_order->save();
             //
- * 
- */
+
             $this->decreaseQuantities();
 
             Cart::instance('default')->destroy();
             session()->forget('coupon');
-/*            
+            
             $paydata = array(
                 'PAYGATE_ID'        => ENV('PAYGATE_ID'), //10011072130,
                 'PAY_REQUEST_ID'    => $output['PAY_REQUEST_ID'],
@@ -144,17 +143,17 @@ class CheckoutController extends Controller
 
             $checksum = md5(implode('', $paydata) . $encryptionKey);
  
- * 
- */         $the_order->pay_request_id = $the_order->id.'Test';
-            $the_order->save();
+  
+ //         $the_order->pay_request_id = $the_order->id.'Test';
+ //           $the_order->save();
             // For Testing 
-            $request = (object)[
-                'PAY_REQUEST_ID' => $the_order->id.'Test',
-                'TRANSACTION_STATUS' => 1,
-              ];
+ //           $request = (object)[
+ //               'PAY_REQUEST_ID' => $the_order->id.'Test',
+ //               'TRANSACTION_STATUS' => 1,
+ //             ];
             
-            return $this->test_success($request);
-            /*
+ //           return $this->test_success($request);
+            
             return view('payment')->with([
                 'order' => $the_order,
                 'PAY_REQUEST_ID' => $output['PAY_REQUEST_ID'],
@@ -164,8 +163,7 @@ class CheckoutController extends Controller
                 'newTax' => getNumbers()->get('newTax'),
                 'newTotal' => getNumbers()->get('newTotal'),
             ]);
-             * 
-             */
+             
             
         //    
 
