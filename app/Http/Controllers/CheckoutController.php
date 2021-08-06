@@ -203,6 +203,7 @@ class CheckoutController extends Controller
                             $downloads->order_id = $order->id;
                             $downloads->product_id = $product->id;
                             $downloads->file = $files[0]->download_link;
+                            $downloads->name = $product->name.' Meal Plans';
                             $downloads->hash = Hash::make($files[0]->download_link);
                             $downloads->expiry_date = date('Y-m-d',strtotime('+14 days'));
                             $downloads->save();
@@ -221,6 +222,7 @@ class CheckoutController extends Controller
                             $downloads->order_id = $order->id;
                             $downloads->product_id = $product->id;
                             $downloads->file = $files[0]->download_link;
+                            $downloads->name = $product->name.' Workout Plans';
                             $downloads->hash = Hash::make($files[0]->download_link);
                             $downloads->expiry_date = date('Y-m-d',strtotime('+14 days'));
                             $downloads->save();
@@ -230,7 +232,7 @@ class CheckoutController extends Controller
 
                     }
                 }
-    //            Mail::send(new OrderPlaced($order));
+                Mail::send(new OrderPlaced($order));
             }
             //
             $order->status = $request->TRANSACTION_STATUS;
