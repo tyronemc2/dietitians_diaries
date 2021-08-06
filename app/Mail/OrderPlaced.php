@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Order;
+use App\OrderDownloads;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -13,6 +14,7 @@ class OrderPlaced extends Mailable
     use Queueable, SerializesModels;
 
     public $order;
+    public $downloads;
 
     /**
      * Create a new message instance.
@@ -22,6 +24,9 @@ class OrderPlaced extends Mailable
     public function __construct(Order $order)
     {
         $this->order = $order;
+        //
+        $downs = OrderDownloads::where('order_id', $order->id)->get();
+        $this->downloads = $downs;
     }
 
     /**
@@ -36,24 +41,7 @@ class OrderPlaced extends Mailable
                     ->bcc('jessica@dietitiansdiaries.com')
                     ->subject('Order from Dietitians Diaries')
                     ->markdown('emails.orders.placed');
-                    foreach($this->order->products as $product){
-                        if ($product->meal_plans) {
-                            $files = json_decode($product->meal_plans);
-                               $mail = $mail->attach($path.$files[0]->download_link, [
-                                    'as' => $files[0]->original_name, 
-                                    'mime' => 'application/pdf'
-                                ]);
-                        }
-                        if ($product->workout_plans) {
-                            $files = json_decode($product->workout_plans);
-
-                                $mail = $mail->attach($path.$files[0]->download_link, [
-                                    'as' => $files[0]->original_name, 
-                                    'mime' => 'application/pdf'
-                                ]);
-
-                        }
-                    }
+                    
                     return $mail;
     }
 }

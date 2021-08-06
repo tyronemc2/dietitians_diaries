@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\Product;
 use App\OrderProduct;
+use App\OrderDownloads;
 use App\Mail\OrderPlaced;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -12,6 +13,7 @@ use App\Http\Requests\CheckoutRequest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Cartalyst\Stripe\Exception\CardErrorException;
+use Illuminate\Support\Facades\Hash;
 
 class CheckoutController extends Controller
 {
@@ -89,7 +91,7 @@ class CheckoutController extends Controller
             $the_order->save();
 
             $fieldsString = http_build_query($data);
-
+/*
             //open connection
             $ch = curl_init();
 
@@ -123,14 +125,16 @@ class CheckoutController extends Controller
                 return back()->withErrors('Error! Something went wrong with the payment ORDER_ID Invalid');
             }
             
-            $the_order->pay_request_id = $output['PAY_REQUEST_ID'];
-            $the_order->save();
+                $the_order->pay_request_id = $output['PAY_REQUEST_ID'];
+                $the_order->save();
             //
+ * 
+ */
             $this->decreaseQuantities();
 
             Cart::instance('default')->destroy();
             session()->forget('coupon');
-            
+/*            
             $paydata = array(
                 'PAYGATE_ID'        => ENV('PAYGATE_ID'), //10011072130,
                 'PAY_REQUEST_ID'    => $output['PAY_REQUEST_ID'],
@@ -139,7 +143,18 @@ class CheckoutController extends Controller
             );
 
             $checksum = md5(implode('', $paydata) . $encryptionKey);
-           
+ 
+ * 
+ */         $the_order->pay_request_id = $the_order->id.'Test';
+            $the_order->save();
+            // For Testing 
+            $request = (object)[
+                'PAY_REQUEST_ID' => $the_order->id.'Test',
+                'TRANSACTION_STATUS' => 1,
+              ];
+            
+            return $this->test_success($request);
+            /*
             return view('payment')->with([
                 'order' => $the_order,
                 'PAY_REQUEST_ID' => $output['PAY_REQUEST_ID'],
@@ -149,6 +164,8 @@ class CheckoutController extends Controller
                 'newTax' => getNumbers()->get('newTax'),
                 'newTotal' => getNumbers()->get('newTotal'),
             ]);
+             * 
+             */
             
         //    
 
@@ -177,6 +194,123 @@ class CheckoutController extends Controller
             //
             //
             if($request->TRANSACTION_STATUS == 1){
+                foreach($order->products as $product){
+                    if ($product->meal_plans) {
+                        //
+                        $x = 0;
+                        while ($x < $product->pivot->quantity){
+                            $files = json_decode($product->meal_plans);
+
+                            $downloads = new OrderDownloads();
+                            $downloads->order_id = $order->id;
+                            $downloads->product_id = $product->id;
+                            $downloads->file = $files[0]->download_link;
+                            $downloads->hash = Hash::make($files[0]->download_link);
+                            $downloads->expiry_date = date('Y-m-d',strtotime('+14 days'));
+                            $downloads->save();
+
+                            $x++;
+                        }
+
+                    }
+                    if ($product->workout_plans) {
+                        //
+                        $x = 0;
+                        while ($x < $product->pivot->quantity){
+                            $files = json_decode($product->workout_plans);
+
+                            $downloads = new OrderDownloads();
+                            $downloads->order_id = $order->id;
+                            $downloads->product_id = $product->id;
+                            $downloads->file = $files[0]->download_link;
+                            $downloads->hash = Hash::make($files[0]->download_link);
+                            $downloads->expiry_date = date('Y-m-d',strtotime('+14 days'));
+                            $downloads->save();
+
+                            $x++;
+                        }
+
+                    }
+                }
+    //            Mail::send(new OrderPlaced($order));
+            }
+            //
+            $order->status = $request->TRANSACTION_STATUS;
+            $order->paygate_status = $statuses[$request->TRANSACTION_STATUS];
+            $order->save();
+            //
+            if($order->paygate_status == 1){
+                return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
+            }else{
+                return redirect()->route('confirmation.index')->with('error_message', 'Your payment was not accepted!');
+            }
+        }else{
+            return redirect()->route('confirmation.index')->with('error_message', 'Your payment was not accepted!');
+        }
+    }
+    public function test_success($request)
+    {
+        //
+        //
+        //echo $request->TRANSACTION_STATUS;
+        $statuses = array(
+            0 => 'Not Done',
+            1 => 'Approved',
+            2 => 'Declined',
+            3 => 'Cancelled',
+            4 => 'User Cancelled',
+            5 => 'Received by PayGate',
+            7 => 'Settlement Voided'
+        );
+        $order_id = $request->PAY_REQUEST_ID;
+        $order = Order::where('pay_request_id', $order_id)->first();
+        //
+        if($order){
+            //
+            //
+            if($request->TRANSACTION_STATUS == 1){
+                 foreach($order->products as $product){
+                
+                    if ($product->meal_plans) {
+                        //
+                        $x = 0;
+                        while ($x < $product->pivot->quantity){
+                            $files = json_decode($product->meal_plans);
+
+                            $downloads = new OrderDownloads();
+                            $downloads->order_id = $order->id;
+                            $downloads->product_id = $product->id;
+                            $downloads->file = $files[0]->download_link;
+                            $downloads->name = $product->name.' Meal Plans';
+                            $downloads->hash = Hash::make($files[0]->download_link);
+                            $downloads->expiry_date = date('Y-m-d',strtotime('+14 days'));
+                            $downloads->save();
+
+                            $x++;
+                        }
+
+                    }
+                    if ($product->workout_plans) {
+                        //
+                        $x = 0;
+                        while ($x < $product->pivot->quantity){
+                            $files = json_decode($product->workout_plans);
+
+                            $downloads = new OrderDownloads();
+                            $downloads->order_id = $order->id;
+                            $downloads->product_id = $product->id;
+                            $downloads->file = $files[0]->download_link;
+                            $downloads->name = $product->name.' Workout Plans';
+                            $downloads->hash = Hash::make($files[0]->download_link);
+                            $downloads->expiry_date = date('Y-m-d',strtotime('+14 days'));
+                            $downloads->save();
+
+                            $x++;
+                        }
+
+                    }
+                }
+       //         dd($order); exit();
                 Mail::send(new OrderPlaced($order));
             }
             //

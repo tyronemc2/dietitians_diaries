@@ -17,6 +17,12 @@ Thank you for your order.
 Name: {{ $product->name }} <br>
 Price: R{{ round($product->price / 100, 2)}} <br>
 Quantity: {{ $product->pivot->quantity }} <br>
+@foreach($downloads as $download)
+@component('mail::button', ['url' => env('APP_URL').'/downloads/'.$download->hash, 'color' => 'green'])
+Download {{ $download->name }}
+@endcomponent
+@endforeach
+
 @endforeach
 
 You can get further details about your order by logging into our website.
