@@ -29,7 +29,9 @@ class HomeController extends Controller
     public function downloads($hash = null)
     {
         $expiry = date('Y-m-d H:i:s');
-        $download = OrderDownloads::where('hash', $hash)->where('downloaded_date', NULL)->where('expiry_date', '>', $expiry);
+        $download = OrderDownloads::where('hash', $hash)
+            //->where('downloaded_date', NULL)
+            ->where('expiry_date', '>', $expiry);
 		$download = $download->firstOrFail();
         //
         if($download){
